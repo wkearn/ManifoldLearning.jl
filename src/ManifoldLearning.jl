@@ -2,6 +2,7 @@ module ManifoldLearning
 
     using StatsBase
     using MultivariateStats
+    using Distances
 
     import Base: show, dump, eigvals
     import MultivariateStats: outdim, projection, transform

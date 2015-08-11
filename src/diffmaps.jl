@@ -33,20 +33,21 @@ function dump(io::IO, M::DiffMap)
 end
 
 ## interface functions
-function transform(::Type{DiffMap}, X::DenseMatrix{Float64}; d::Int=2, t::Int=1, ɛ::Float64=1.0)
-    transform!(fit(UnitRangeTransform, X), X)
+function transform(::Type{DiffMap}, X::DenseMatrix{Float64}; d::Int=2, α::Int=1, ε::Float64=1.0)
 
-    sumX = sum(X.^ 2, 1)
-    K = exp(( sumX' .+ sumX .- 2*At_mul_B(X,X) ) ./ ɛ)
+    #    transform!(fit(UnitRangeTransform, X), X)
+    X = (X-minimum(X))./(maximum(X)-minimum(X))
+    # Replace this when UnitRangeTransform becomes more widely available
 
+    K = exp(-pairwise(SqEuclidean(),X)./ε)
     p = sum(K, 1)'
-    K ./= ((p * p') .^ t)
+    K ./= ((p * p') .^ α)
     p = sqrt(sum(K, 1))'
     K ./= (p * p')
 
-    U, S, V = svd(K, thin=false)
+    U, s, V = svd(K, thin=false)
     U ./= U[:,1]
     Y = U[:,2:(d+1)]
 
-    return DiffMap(t, ɛ, K, Y')
+    return DiffMap(α, ε, K, Y')
 end
