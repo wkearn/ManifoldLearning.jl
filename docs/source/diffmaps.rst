@@ -42,7 +42,7 @@ One can use the ``transform`` method to perform DiffMap over a given dataset.
     =========== =============================================================== ===============
      d          Output dimension.                                               ``2``
     ----------- --------------------------------------------------------------- ---------------
-     t          Number of time steps.                                           ``1``
+     α          Normalization parameter                                         ``1``
     ----------- --------------------------------------------------------------- ---------------
      ɛ          The scale parameter.                                            ``1.0``
     =========== =============================================================== ===============
@@ -59,4 +59,4 @@ One can use the ``transform`` method to perform DiffMap over a given dataset.
     Y = transform(DiffMap, X; d=2, t=1, ɛ=1.0)
 
 .. rubric:: References
-.. [#R1] Coifman, R. & Lafon, S. "Diffusion maps". Applied and Computational Harmonic Analysis, Elsevier, 2006, 21, 5-30. DOI:`10.1073/pnas.0500334102 <http://dx.doi.org/doi:10.1073/pnas.0500334102>`_
+.. [#R1] Coifman, R. & Lafon, S. "Diffusion maps". Applied and Computational Harmonic Analysis, Elsevier, 2006, 21, 5-30. DOI:`10.1016/j.acha.2006.04.006  <http://dx.doi.org/10.1016/j.acha.2006.04.006>`_
