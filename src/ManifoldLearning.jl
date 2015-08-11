@@ -3,6 +3,7 @@ module ManifoldLearning
     using StatsBase
     using MultivariateStats
     using Distances
+    using TSVD
 
     import Base: show, dump, eigvals
     import MultivariateStats: outdim, projection, transform

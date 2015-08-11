@@ -45,9 +45,9 @@ function transform(::Type{DiffMap}, X::DenseMatrix{Float64}; d::Int=2, α::Int=1
     p = sqrt(sum(K, 1))'
     K ./= (p * p')
 
-    U, s, V = svd(K, thin=false)
+    U, s, V = tsvd(K, d+1)
     U ./= U[:,1]
-    Y = U[:,2:(d+1)]
+    Y = U[:,2:end]
 
     return DiffMap(α, ε, K, Y')
 end
