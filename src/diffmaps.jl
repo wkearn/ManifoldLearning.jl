@@ -60,9 +60,9 @@ function transform(::Type{DiffMap}, X::DenseMatrix{Float64}; d::Int=2, α::Int=1
 end
 
 # Nystrom extension for regression taken from Freeman et al. MNRAS 2009
-function nystrom(dm::DiffMap, X::DenseMatrix{Float64}, Y::DenseMatrix{Float64})
-    W = exp(-pairwise(SqEuclidean(),X,Y)./dm.ε) #Compute the kernel
+function nystrom(M::DiffMap, X::DenseMatrix{Float64}, Y::DenseMatrix{Float64})
+    W = exp(-pairwise(SqEuclidean(),X,Y)./M.ε) #Compute the kernel
     W./=sum(W,1) # Row-normalize except our rows are columns
-    dm.proj*W #Eq. 4 from Freeman but reversed because everything is transposed
+    M.proj*W #Eq. 4 from Freeman but reversed because everything is transposed
     # and we don't multiply by the eigenvalues in the projection matrix
 end
