@@ -19,6 +19,10 @@ outdim(M::DiffMap) = size(M.proj, 1)
 projection(M::DiffMap) = M.proj
 kernel(M::DiffMap) = M.K
 
+## Calculate diffusion coordinates from eigenvalues and projection
+
+coords(M::DiffMap) = M.proj.*M.λ
+
 ## show & dump
 function show(io::IO, M::DiffMap)
     print(io, "Diffusion Maps(outdim = $(outdim(M)), t = $(M.t), ε = $(M.ε))")
